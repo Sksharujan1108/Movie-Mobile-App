@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, StatusBar, Text, View } from "react-native";
 import { images } from "@/constants/images";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/searchBar";
 import { useRouter } from "expo-router";
+import { useAppDispatch, useAppSelector } from "@/feature/stateHooks";
+import { selectHomeGetTrendingMoviesDataSelector } from "@/feature/slices/homeSlice";
+import { requestHomeGetTrendingMoviesData } from "@/feature/thunks/homeThunks";
 
 export default function Index() {
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
+  const GetTrendingMoviesData = useAppSelector(selectHomeGetTrendingMoviesDataSelector);
+  console.log("GetTrendingMoviesData => ", GetTrendingMoviesData);
+  
   const [searchList, setSearchList] = useState("");
+
+  useEffect(() => {
+    const params = {
+      include_adult: false,
+      include_video: false,
+      language: "en-US",
+      page: 1,
+      sort_by: "popularity.desc",
+    }
+    dispatch(requestHomeGetTrendingMoviesData(params));
+  }, [])
+  
   return (
     <View
       className="flex-1 bg-primary"
