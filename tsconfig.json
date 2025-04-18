@@ -1,17 +1,24 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "jsx": "react",
     "strict": true,
+    "esModuleInterop": true,
+    "noImplicitThis": false,
+    "types": ["node", "jest"],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./src/*"]
+    },
+    "module": "commonjs"
   },
   "include": [
+    "./src/**/*",
+    "babel.config.js",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+    "expo-env.d.ts",
+    "nativewind-env.d.ts",
+  ],
+  "typeRoots": ["types"]
 }
