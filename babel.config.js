@@ -9,10 +9,12 @@ module.exports = function (api) {
         [
           "module-resolver",
           {
-            root: ["./src"],
+            root: [
+              "./src",
+            ],
             extensions: [".js", ".json", ".ts", ".tsx", ".jsx"],
             alias: {
-              "@": "./src",
+              "@": "./src", 
             },
           },
           "react-native-reanimated/plugin",
