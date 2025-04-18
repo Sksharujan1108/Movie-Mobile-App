@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,} from "react-native";
 import { images } from "@/constants/images";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/searchBar";
 import { useRouter } from "expo-router";
 import { useAppDispatch, useAppSelector } from "@/feature/stateHooks";
-import { selectHomeGetTrendingMoviesDataSelector } from "@/feature/slices/homeSlice";
+import {
+  selectHomeGetTrendingMoviesDataSelector,
+  selectHomeGetTrendingMoviesDataSelectorStatus,} from "@/feature/slices/homeSlice";
 import { requestHomeGetTrendingMoviesData } from "@/feature/thunks/homeThunks";
+import { STATUS } from "@/feature/services/status_constants";
+import MovieCard from "@/components/movieCard";
 
 export default function Index() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const GetTrendingMoviesData = useAppSelector(selectHomeGetTrendingMoviesDataSelector);
-  console.log("GetTrendingMoviesData => ", GetTrendingMoviesData);
-  
+
+  const GetTrendingMoviesData = useAppSelector(
+    selectHomeGetTrendingMoviesDataSelector
+  );
+  const GetTrendingMoviesDataStatus = useAppSelector(
+    selectHomeGetTrendingMoviesDataSelectorStatus
+  );
+
+  const moviesData = GetTrendingMoviesData?.results ?? [];
+
+  console.log("moviesData => ", moviesData);
+
   const [searchList, setSearchList] = useState("");
 
   useEffect(() => {
@@ -23,14 +43,12 @@ export default function Index() {
       language: "en-US",
       page: 1,
       sort_by: "popularity.desc",
-    }
+    };
     dispatch(requestHomeGetTrendingMoviesData(params));
-  }, [])
-  
+  }, []);
+
   return (
-    <View
-      className="flex-1 bg-primary"
-    >
+    <View className="flex-1 bg-primary">
       {/* Transparent status bar for Android */}
       <StatusBar
         translucent
@@ -38,20 +56,19 @@ export default function Index() {
         barStyle="light-content"
       />
       {/* Background image */}
-      <Image
-        source={images.bg}
-        className="absolute w-full z-0"
-      />
+      <Image source={images.bg} className="absolute w-full z-0" />
       {/* ScrollView */}
-      <ScrollView
-        className="flex-1 px-5" 
-      >
-          <Image
-            source={icons.logo} 
-            className=" w-12 z-10 mt-20 mb-5 mx-auto"
-          />
+      <ScrollView className="flex-1 px-5">
+        <Image source={icons.logo} className=" w-12 z-10 mt-20 mb-5 mx-auto" />
 
-          {/* Search bar */}
+        {/* Activator indicator */}
+        {!GetTrendingMoviesDataStatus ? (
+          <ActivityIndicator
+            size="large"
+            color="#0000ff"
+            className="mt-10 self-center"
+          />
+        ) : (
           <View className="flex-1 mt-5">
             <SearchBar
               placeholder="Search for a movie"
@@ -60,8 +77,37 @@ export default function Index() {
               // InLine function
               onPress={() => router.push(`/search`)}
             />
+
+            {/*  */}
+            <>
+            <Text
+             className="text-lg text-white font-bold mt-5 mb-3"
+            >
+              Latest Movies
+            </Text>
+            {/* List of Items */}
+            <FlatList
+              scrollEnabled={false}
+              className="mt-2 pb-32"
+              data={moviesData}
+              keyExtractor={(item) => item?.id?.toString()}
+              renderItem={({ item }) => (
+                <MovieCard
+                  {...item}
+                />
+              )}
+              numColumns={3}
+              columnWrapperStyle={{ 
+                justifyContent: 'flex-start' ,
+                gap: 20,
+                paddingRight: 5,
+                marginBottom: 10,
+              }}
+            />
+            </>
           </View>
-      </ScrollView>  
+        )}
+      </ScrollView>
     </View>
   );
 }

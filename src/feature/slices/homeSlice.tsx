@@ -51,7 +51,7 @@ export const homeSliceSelector = (state: RootState) => state.home.homeSliceStatu
 
 // Home Get Trending Movies Data Selector ---
 export const selectHomeGetTrendingMoviesDataSelector = (state: RootState) => state.home.homeGetTrendingMoviesData;
-export const selectHomeGetTrendingMoviesDataStatusSelector = (state: RootState) => state.home.homeGetTrendingMoviesDataStatus;
+export const selectHomeGetTrendingMoviesDataSelectorStatus = (state: RootState) => state.home.homeGetTrendingMoviesDataStatus;
 // End Home Get Trending Movies Data Selector ----
 
 export default home_slice;

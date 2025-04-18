@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#0f0d23', // your dark-200
-    marginHorizontal: 10,
+    padding: 15,
+    borderRadius: 10,
   },
   icon: {
     width: 20,

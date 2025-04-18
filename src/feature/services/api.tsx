@@ -32,7 +32,6 @@ instance.interceptors.request.use(
   (config: any) => {
     // Do something before request is sent
     console.log("config => ", config.headers.Authorization);
-    
     return config;
   },
   function (error: any) {
