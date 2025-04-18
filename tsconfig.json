@@ -7,7 +7,9 @@
     "noImplicitThis": false,
     "types": ["node", "jest"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*",
+      ]
     },
     "module": "commonjs"
   },
