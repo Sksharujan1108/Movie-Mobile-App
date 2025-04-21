@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: '#0f0d23', // your dark-200
-    backgroundColor: 'pink',
+    backgroundColor: '#0f0d23', // your dark-200
+    // backgroundColor: 'pink',
     padding: 15,
     borderRadius: 10,
   },
