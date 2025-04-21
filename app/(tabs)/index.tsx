@@ -6,7 +6,8 @@ import {
   ScrollView,
   StatusBar,
   Text,
-  View,} from "react-native";
+  View,
+} from "react-native";
 import { images } from "@/constants/images";
 import { icons } from "@/constants/icons";
 import SearchBar from "@/components/searchBar";
@@ -14,7 +15,8 @@ import { useRouter } from "expo-router";
 import { useAppDispatch, useAppSelector } from "@/feature/stateHooks";
 import {
   selectHomeGetTrendingMoviesDataSelector,
-  selectHomeGetTrendingMoviesDataSelectorStatus,} from "@/feature/slices/homeSlice";
+  selectHomeGetTrendingMoviesDataSelectorStatus,
+} from "@/feature/slices/homeSlice";
 import { requestHomeGetTrendingMoviesData } from "@/feature/thunks/homeThunks";
 import { STATUS } from "@/feature/services/status_constants";
 import MovieCard from "@/components/movieCard";
@@ -31,10 +33,6 @@ export default function Index() {
   );
 
   const moviesData = GetTrendingMoviesData?.results ?? [];
-
-  console.log("moviesData => ", moviesData);
-
-  const [searchList, setSearchList] = useState("");
 
   useEffect(() => {
     const params = {
@@ -62,7 +60,7 @@ export default function Index() {
         <Image source={icons.logo} className=" w-12 z-10 mt-20 mb-5 mx-auto" />
 
         {/* Activator indicator */}
-        {!GetTrendingMoviesDataStatus ? (
+        {GetTrendingMoviesDataStatus == STATUS.LOADING ? (
           <ActivityIndicator
             size="large"
             color="#0000ff"
@@ -72,38 +70,30 @@ export default function Index() {
           <View className="flex-1 mt-5">
             <SearchBar
               placeholder="Search for a movie"
-              value={searchList}
-              onChangeText={setSearchList}
               // InLine function
               onPress={() => router.push(`/search`)}
             />
 
             {/*  */}
             <>
-            <Text
-             className="text-lg text-white font-bold mt-5 mb-3"
-            >
-              Latest Movies
-            </Text>
-            {/* List of Items */}
-            <FlatList
-              scrollEnabled={false}
-              className="mt-2 pb-32"
-              data={moviesData}
-              keyExtractor={(item) => item?.id?.toString()}
-              renderItem={({ item }) => (
-                <MovieCard
-                  {...item}
-                />
-              )}
-              numColumns={3}
-              columnWrapperStyle={{ 
-                justifyContent: 'flex-start' ,
-                gap: 20,
-                paddingRight: 5,
-                marginBottom: 10,
-              }}
-            />
+              <Text className="text-lg text-white font-bold mt-5 mb-3">
+                Latest Movies
+              </Text>
+              {/* List of Items */}
+              <FlatList
+                scrollEnabled={false}
+                className="mt-2 pb-32"
+                data={moviesData}
+                keyExtractor={(item) => item?.id?.toString()}
+                renderItem={({ item }) => <MovieCard {...item} />}
+                numColumns={3}
+                columnWrapperStyle={{
+                  justifyContent: "flex-start",
+                  gap: 20,
+                  paddingRight: 5,
+                  marginVertical: 10,
+                }}
+              />
             </>
           </View>
         )}

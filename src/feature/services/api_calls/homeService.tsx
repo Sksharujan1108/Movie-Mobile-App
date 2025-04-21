@@ -1,4 +1,4 @@
-import { IHomeGetTrendingMoviesDataRequestBody, IHomeGetTrendingMoviesDataResponseBody } from "@/feature/redux_models/home_model";
+import { IHomeGetSearchTrendingMoviesDataRequestBody, IHomeGetSearchTrendingMoviesDataResponseBody, IHomeGetTrendingMoviesDataRequestBody, IHomeGetTrendingMoviesDataResponseBody } from "@/feature/redux_models/home_model";
 import { requests } from "../api";
 import { AUTH_BASE_URL } from "@/env";
 import { AxiosResponse } from "axios";
@@ -8,7 +8,17 @@ export function requestHomeGetTrendingMoviesDataService(
     params: IHomeGetTrendingMoviesDataRequestBody,
 ): Promise<AxiosResponse<IHomeGetTrendingMoviesDataResponseBody>> {
     return requests.get(
-        `${AUTH_BASE_URL}/3/discover/movie?include_adult=${params?.include_adult}&include_video=${params?.include_video}&language=${params?.language}&page=${params?.page}&sort_by=${params?.sort_by}`,
+        `${AUTH_BASE_URL}/discover/movie?sort_by=${params?.sort_by}`,
     );
 }
-// Home Get Trending Movies Data Service ---
+// End Home Get Trending Movies Data Service ---
+
+// Home Get Search Movies Data Service ---
+export function requestHomeGetSearchMoviesDataService(
+    params: IHomeGetSearchTrendingMoviesDataRequestBody,
+): Promise<AxiosResponse<IHomeGetSearchTrendingMoviesDataResponseBody>> {
+    return requests.get(
+        `${AUTH_BASE_URL}/search/movie?query=${params?.query}`,
+    );
+}
+// End Home Get Search Movies Data Service ---

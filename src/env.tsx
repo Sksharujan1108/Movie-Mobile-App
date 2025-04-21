@@ -10,15 +10,15 @@ const INITIAL_STATE = {
 switch (select_env) {
   case ENV.DEV:
     Object.assign(INITIAL_STATE, {
-      AUTH_BASE_URL: "https://api.themoviedb.org",
-      BASE_URL: "https://api.themoviedb.org",
+      AUTH_BASE_URL: "https://api.themoviedb.org/3",
+      BASE_URL: "https://api.themoviedb.org/3",
     });
     break;
 
   case ENV.QA:
     Object.assign(INITIAL_STATE, {
-      AUTH_BASE_URL: "https://api.themoviedb.org",
-      BASE_URL: "https://api.themoviedb.org",
+      AUTH_BASE_URL: "https://api.themoviedb.org/3",
+      BASE_URL: "https://api.themoviedb.org/3",
     });
     break;
   case ENV.PROD:

@@ -5,6 +5,10 @@ export default interface IHomeState {
     homeGetTrendingMoviesData: IHomeGetTrendingMoviesDataResponseBody | undefined;
     homeGetTrendingMoviesDataStatus: string | undefined;
 
+    // Get Search The Trending Movies Details
+    homeGetSearchTrendingMoviesData: IHomeGetSearchTrendingMoviesDataResponseBody | undefined;
+    homeGetSearchTrendingMoviesDataStatus: string | undefined;
+
 }
 
 // Home Error
@@ -16,10 +20,6 @@ export interface IHomeError {
 
 // Home Get Trending Movies Data RequestBody 
 export interface IHomeGetTrendingMoviesDataRequestBody {
-    include_adult: boolean | undefined;
-    include_video: boolean | undefined;
-    language: string | undefined;
-    page: number | undefined;
     sort_by: string | undefined;
 }
 
@@ -46,3 +46,17 @@ export interface ITrendingMovie {
     vote_average: number | undefined;
     vote_count: number | undefined;
 }
+// End Home Get Trending Movies Data Body ---
+
+// Home Get Search Trending Movies Data ResponseBody
+export interface IHomeGetSearchTrendingMoviesDataRequestBody {
+    query: string | undefined;
+}
+export interface IHomeGetSearchTrendingMoviesDataResponseBody {
+    page: number | undefined;
+    results: ITrendingMovie[] | undefined;
+    total_pages: number | undefined;
+    total_results: number | undefined;
+}
+// End Home Get Search Trending Movies Data Body ---
+
