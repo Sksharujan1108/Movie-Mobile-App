@@ -7,7 +7,7 @@ interface MovieCardProps {
   id: number | string;
   poster_path: string | undefined;
   title: string | undefined;
-  vote_average: number | undefined;
+  vote_average: any | number
   release_date: string | undefined;
 }
 
@@ -21,7 +21,7 @@ const MovieCard = (props: MovieCardProps) => {
   } = props;
 
   return (
-    <Link href={`/movieDetails/${id}`}>
+    <Link href={`/movieDetails/${id}`} asChild>
       <TouchableOpacity
         style={styles.card}
         activeOpacity={0.8}
