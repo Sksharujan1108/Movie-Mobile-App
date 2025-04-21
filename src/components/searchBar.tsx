@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TextInput, View } from 'react-native'
+import { Image, Platform, StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 import { icons } from '@/constants/icons'
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#0f0d23', // your dark-200
     // backgroundColor: 'pink',
-    padding: 15,
+    padding: Platform.OS === 'ios' ? 14 : 5,
     borderRadius: 10,
   },
   icon: {

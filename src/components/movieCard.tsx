@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import { icons } from '@/constants/icons';
 
 interface MovieCardProps {
-  id: number | undefined;
+  id: number | string;
   poster_path: string | undefined;
   title: string | undefined;
   vote_average: number | undefined;

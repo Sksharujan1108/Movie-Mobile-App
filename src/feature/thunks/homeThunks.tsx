@@ -10,7 +10,6 @@ export const requestHomeGetTrendingMoviesData = createAsyncThunk(
     async (params: IHomeGetTrendingMoviesDataRequestBody, { rejectWithValue }) => {
         try {
             const response = await requestHomeGetTrendingMoviesDataService(params);
-            console.log("response => ", response);
             return response.data;
         } catch (err: any) {
             const error: AxiosError<IHomeError> = err; // cast the error for access
@@ -31,7 +30,6 @@ export const requestHomeGetSearchTrendingMoviesData = createAsyncThunk(
     async (params: IHomeGetSearchTrendingMoviesDataRequestBody, { rejectWithValue }) => {
         try {
             const response = await requestHomeGetSearchMoviesDataService(params);
-            console.log("response => Search --- ", response);
             return response.data;
         } catch (err: any) {
             const error: AxiosError<IHomeError> = err; // cast the error for access

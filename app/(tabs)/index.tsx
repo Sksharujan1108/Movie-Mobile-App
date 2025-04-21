@@ -20,6 +20,8 @@ import {
 import { requestHomeGetTrendingMoviesData } from "@/feature/thunks/homeThunks";
 import { STATUS } from "@/feature/services/status_constants";
 import MovieCard from "@/components/movieCard";
+import { getTrendingMovies } from "@/feature/services/appwrite";
+import TrendingCard from "@/components/trendingCard";
 
 export default function Index() {
   const router = useRouter();
@@ -34,17 +36,31 @@ export default function Index() {
 
   const moviesData = GetTrendingMoviesData?.results ?? [];
 
+  const [topSearchedMovies, setTopSearchedMovies] = useState<TrendingMovie[]>([]);
+
   useEffect(() => {
     const params = {
-      include_adult: false,
-      include_video: false,
-      language: "en-US",
-      page: 1,
       sort_by: "popularity.desc",
     };
     dispatch(requestHomeGetTrendingMoviesData(params));
   }, []);
 
+  // Get Trending Movies
+  useEffect(() => {
+    const fetchTopSearched = async () => {
+      try {
+        const response = await getTrendingMovies();
+        if (response) {
+          setTopSearchedMovies(response);
+        }
+      } catch (error) {
+        console.error("Error fetching top searched movies:", error);
+      } 
+    };
+    fetchTopSearched()
+  }, []);
+  console.log("topSearchedMovies", topSearchedMovies);
+  
   return (
     <View className="flex-1 bg-primary">
       {/* Transparent status bar for Android */}
@@ -74,7 +90,34 @@ export default function Index() {
               onPress={() => router.push(`/search`)}
             />
 
-            {/*  */}
+            {/* Top Searched Movies */}
+            {topSearchedMovies && (
+              <View className="mt-10">
+                <Text className="text-lg text-white font-bold mb-3">
+                  Tending Movies
+                </Text>
+                {/* List of Items */}
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  className="mb-4 mt-3"
+                  ItemSeparatorComponent={() => <View className="w-4" />}
+                  data={topSearchedMovies}
+                  keyExtractor={(item) => item?.movie_id?.toString()}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <TrendingCard
+                        movie={{ ...item }}
+                        index={index}
+                      />
+                    );
+                  }}
+                  
+                />
+              </View>
+            )}
+
+            {/* Latest Movies */}
             <>
               <Text className="text-lg text-white font-bold mt-5 mb-3">
                 Latest Movies

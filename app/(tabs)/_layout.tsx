@@ -45,6 +45,7 @@ const _layout = () => {
         tabBarShowLabel: false, // Hide the tab label
         tabBarItemStyle: styles.tabBarItemStyle,
         tabBarStyle: styles.tabBarStyle,
+        tabBarHideOnKeyboard: false, // 👈 Prevents hiding/moving tab bar when keyboard is open
       }}
     >
       <Tabs.Screen

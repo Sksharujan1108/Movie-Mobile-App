@@ -34,7 +34,7 @@ export interface ITrendingMovie {
     adult: boolean | undefined;
     backdrop_path: string | undefined;
     genre_ids: number[] | undefined;
-    id: number | undefined;
+    id: number | string;
     original_language: string | undefined;
     original_title: string | undefined;
     overview: string | undefined;
