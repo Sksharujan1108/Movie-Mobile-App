@@ -65,18 +65,27 @@ export interface IHomeGetSearchTrendingMoviesDataResponseBody {
 
 // Home Get Single Movie Details Data RequestBody
 export interface IHomeGetSingleMovieDetailsDataRequestBody {
-    movie_id: number | undefined;
+    movie_id: number | any;
 }
 
 // Home Get Single Movie Details Data ResponseBody
 export interface IHomeGetSingleMovieDetailsDataResponseBody {
     id: number | undefined;
+    poster_path: string | undefined;
     title: string | undefined;
     backdrop_path: string | undefined;
     overview: string | undefined;
-    release_date: string | undefined;
+    release_date: string | any;
     vote_average: number | undefined;
+    vote_count: number | undefined;
+    runtime: number | undefined;
+    budget: number | undefined;
+    revenue: number | undefined;
+    production_companies: string[] | undefined;
+    production_countries: string[] | undefined;
+    spoken_languages: string[] | undefined;
     genres: string[] | undefined;
+    status: string | undefined;
 }
 // End Home Get Single Movie Details Data Body ---
 
