@@ -7,7 +7,11 @@ import store from "@/feature/store";
 export default function RootLayout() {
   return (
     <Provider store={store}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="movieDetails" options={{ headerShown: false }} />
       </Stack>

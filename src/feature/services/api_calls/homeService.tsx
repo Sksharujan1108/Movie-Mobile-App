@@ -1,4 +1,4 @@
-import { IHomeGetSearchTrendingMoviesDataRequestBody, IHomeGetSearchTrendingMoviesDataResponseBody, IHomeGetTrendingMoviesDataRequestBody, IHomeGetTrendingMoviesDataResponseBody } from "@/feature/redux_models/home_model";
+import { IHomeGetSearchTrendingMoviesDataRequestBody, IHomeGetSearchTrendingMoviesDataResponseBody, IHomeGetSingleMovieDetailsDataRequestBody, IHomeGetSingleMovieDetailsDataResponseBody, IHomeGetTrendingMoviesDataRequestBody, IHomeGetTrendingMoviesDataResponseBody } from "@/feature/redux_models/home_model";
 import { requests } from "../api";
 import { AUTH_BASE_URL } from "@/env";
 import { AxiosResponse } from "axios";
@@ -22,3 +22,13 @@ export function requestHomeGetSearchMoviesDataService(
     );
 }
 // End Home Get Search Movies Data Service ---
+
+// Home Get Single Movie Details Data Service ---
+export function requestHomeGetSingleMovieDetailsDataService(
+    params: IHomeGetSingleMovieDetailsDataRequestBody,
+): Promise<AxiosResponse<IHomeGetSingleMovieDetailsDataResponseBody>> {
+    return requests.get(
+        `${AUTH_BASE_URL}/movie/${params?.movie_id}`,
+    );
+}
+// End Home Get Single Movie Details Data Service ---

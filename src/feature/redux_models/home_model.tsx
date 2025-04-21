@@ -9,6 +9,9 @@ export default interface IHomeState {
     homeGetSearchTrendingMoviesData: IHomeGetSearchTrendingMoviesDataResponseBody | undefined;
     homeGetSearchTrendingMoviesDataStatus: string | undefined;
 
+    // Get Single Movie Details Data
+    homeGetSingleMovieDetailsData: IHomeGetSingleMovieDetailsDataResponseBody | undefined;
+    homeGetSingleMovieDetailsDataStatus: string | undefined;
 }
 
 // Home Error
@@ -59,4 +62,21 @@ export interface IHomeGetSearchTrendingMoviesDataResponseBody {
     total_results: number | undefined;
 }
 // End Home Get Search Trending Movies Data Body ---
+
+// Home Get Single Movie Details Data RequestBody
+export interface IHomeGetSingleMovieDetailsDataRequestBody {
+    movie_id: number | undefined;
+}
+
+// Home Get Single Movie Details Data ResponseBody
+export interface IHomeGetSingleMovieDetailsDataResponseBody {
+    id: number | undefined;
+    title: string | undefined;
+    backdrop_path: string | undefined;
+    overview: string | undefined;
+    release_date: string | undefined;
+    vote_average: number | undefined;
+    genres: string[] | undefined;
+}
+// End Home Get Single Movie Details Data Body ---
 

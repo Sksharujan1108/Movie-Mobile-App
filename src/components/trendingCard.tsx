@@ -6,7 +6,7 @@ import { images } from "@/constants/images"; // Make sure this is correct
 
 interface TrendingCardProps {
   movie: {
-    movie_id: string;
+    movie_id: number;
     title: string;
     poster_url: string;
     genres: string[];
@@ -17,7 +17,7 @@ interface TrendingCardProps {
 const TrendingCard = (props: TrendingCardProps) => {
   const { movie, index } = props;
   return (
-    <Link href={`/movie/${movie?.movie_id}`} asChild>
+    <Link href={`/movieDetails/${movie?.movie_id}`} asChild>
       <TouchableOpacity style={styles.cardContainer}>
         {/* Poster */}
         <View style={styles.posterContainer}>
@@ -56,12 +56,12 @@ export default TrendingCard;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: 133,
+    width: 120,
     // opacity: 0.5,
     // backgroundColor: "red",
   },
   posterContainer: {
-    width: 133,
+    width: 120,
     height: 167,
     overflow: "hidden",
     alignItems: "center",
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6
   },
   title: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#fff",
     marginTop: 8,

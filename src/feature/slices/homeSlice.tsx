@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import IHomeState from "../redux_models/home_model";
-import { requestHomeGetSearchTrendingMoviesData, requestHomeGetTrendingMoviesData } from "../thunks/homeThunks";
+import { requestHomeGetSearchTrendingMoviesData, requestHomeGetSingleMovieDetailsData, requestHomeGetTrendingMoviesData } from "../thunks/homeThunks";
 import { STATUS } from "../services/status_constants";
 import { RootState } from "../rootReducer";
 
@@ -13,7 +13,11 @@ const DEFAULT_STATE: IHomeState = {
 
     // Home Get Search Trending Movies Data ---
     homeGetSearchTrendingMoviesData: undefined,
-    homeGetSearchTrendingMoviesDataStatus: undefined
+    homeGetSearchTrendingMoviesDataStatus: undefined,
+
+    // Home Get Single Movie Details Data ---
+    homeGetSingleMovieDetailsData: undefined,
+    homeGetSingleMovieDetailsDataStatus: undefined
 };
 
 const INITIAL_STATE: IHomeState = {
@@ -60,6 +64,22 @@ const home_slice = createSlice({
             state.homeGetSearchTrendingMoviesDataStatus = STATUS.FAILED;
         });
         // End Home Get Search Trending Movies Data ---
+
+        // Home Get Single Movie Details Data ---
+        builder.addCase(requestHomeGetSingleMovieDetailsData.pending, (state) => {
+            state.homeSliceStatus = STATUS.LOADING;
+            state.homeGetSingleMovieDetailsDataStatus = STATUS.LOADING;
+        });
+        builder.addCase(requestHomeGetSingleMovieDetailsData.fulfilled, (state, action) => {
+            state.homeGetSingleMovieDetailsData = action.payload;
+            state.homeSliceStatus = STATUS.SUCCEEDED;
+            state.homeGetSingleMovieDetailsDataStatus = STATUS.SUCCEEDED;
+        });
+        builder.addCase(requestHomeGetSingleMovieDetailsData.rejected, (state) => {
+            state.homeSliceStatus = STATUS.FAILED;
+            state.homeGetSingleMovieDetailsDataStatus = STATUS.FAILED;
+        })
+        // End Home Get Single Movie Details Data ---
     }
 });
 
@@ -78,5 +98,10 @@ export const selectHomeGetTrendingMoviesDataSelectorStatus = (state: RootState) 
 export const selectHomeGetSearchTrendingMoviesDataSelector = (state: RootState) => state.home.homeGetSearchTrendingMoviesData;
 export const selectHomeGetSearchTrendingMoviesDataSelectorStatus = (state: RootState) => state.home.homeGetSearchTrendingMoviesDataStatus;
 // End Home Get Search Trending Movies Data Selector ---
+
+// Home Get Single Movie Details Data Selector ---
+export const selectHomeGetSingleMovieDetailsDataSelector = (state: RootState) => state.home.homeGetSingleMovieDetailsData;
+export const selectHomeGetSingleMovieDetailsDataSelectorStatus = (state: RootState) => state.home.homeGetSingleMovieDetailsDataStatus;
+// End Home Get Single Movie Details Data Selector ---
 
 export default home_slice;

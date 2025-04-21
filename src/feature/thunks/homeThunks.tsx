@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IHomeError, IHomeGetSearchTrendingMoviesDataRequestBody, IHomeGetTrendingMoviesDataRequestBody } from "../redux_models/home_model";
-import { requestHomeGetSearchMoviesDataService, requestHomeGetTrendingMoviesDataService } from "../services/api_calls/homeService";
+import { IHomeError, IHomeGetSearchTrendingMoviesDataRequestBody, IHomeGetSingleMovieDetailsDataRequestBody, IHomeGetTrendingMoviesDataRequestBody } from "../redux_models/home_model";
+import { requestHomeGetSearchMoviesDataService, requestHomeGetSingleMovieDetailsDataService, requestHomeGetTrendingMoviesDataService } from "../services/api_calls/homeService";
 import { AxiosError } from "axios";
 
 // Home Get Trending Movies Data Thunk ---
@@ -42,3 +42,23 @@ export const requestHomeGetSearchTrendingMoviesData = createAsyncThunk(
     },
 )
 // End Home Get Search Trending Movies Data Thunk ---
+
+// Home Get Single Movie Details Data Thunk ---
+export const requestHomeGetSingleMovieDetailsData = createAsyncThunk(
+    "@/home/request-home-get-single-movie-details-data",
+    // if you type your function argument here
+    async (params: IHomeGetSingleMovieDetailsDataRequestBody, { rejectWithValue }) => {
+        try {
+            const response = await requestHomeGetSingleMovieDetailsDataService(params);
+            return response.data;
+        } catch (err: any) {
+            const error: AxiosError<IHomeError> = err; // cast the error for access
+            if (!error) {
+                throw err;
+            }
+            // We got validation errors, let's return those so we can reference in our component and set form errors
+            return rejectWithValue(error);
+        }
+    },
+)
+// End Home Get Single Movie Details Data Thunk ---
