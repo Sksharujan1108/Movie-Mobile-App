@@ -72,7 +72,7 @@ export default function Index() {
       {/* Background image */}
       <Image source={images.bg} className="absolute w-full z-0" />
       {/* ScrollView */}
-      <ScrollView className="flex-1 px-5">
+      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: '100%'}}>
         <Image source={icons.logo} className=" w-12 z-10 mt-20 mb-5 mx-auto" />
 
         {/* Activator indicator */}
@@ -119,13 +119,13 @@ export default function Index() {
 
             {/* Latest Movies */}
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-lg text-white font-bold mt-5">
                 Latest Movies
               </Text>
               {/* List of Items */}
               <FlatList
                 scrollEnabled={false}
-                className="mt-2 pb-32"
+                className="mt-3 pb-32"
                 data={moviesData}
                 keyExtractor={(item) => item?.id?.toString()}
                 renderItem={({ item }) => <MovieCard {...item} />}

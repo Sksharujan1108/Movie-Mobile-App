@@ -62,7 +62,7 @@ export default MovieCard;
 const styles = StyleSheet.create({
   card: {
     width: 110,
-    marginBottom: 20,
+    marginBottom: 5,
     marginRight: 10,
   },
   poster: {
